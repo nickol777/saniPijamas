@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 // 2. CONFIGURACIÓN DE APIS REALES
-const url = "https://api.imgbb.com/1/upload?key=fd25ac019aca9ad75a4001e66a5dd4ce";
+const IMGBB_API_KEY = "fd25ac019aca9ad75a4001e66a5dd4ce"; 
 const WHATSAPP_PHONE = "573332244628"; 
 
 // Inicializar Firebase
@@ -135,6 +135,7 @@ productForm.addEventListener('submit', async (e) => {
             const formData = new FormData();
             formData.append('image', imageFile);
 
+            // CORREGIDO AQUÍ: Ahora sí usa la variable correcta con tu clave real
             const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
                 method: 'POST',
                 body: formData
@@ -158,7 +159,6 @@ productForm.addEventListener('submit', async (e) => {
         };
 
         if (editIndex !== "-1") {
-            // ¡CORREGIDO AQUÍ! Cambiado 'docDoc' por 'doc' original de Firebase
             const docId = localProducts[parseInt(editIndex)].id;
             await updateDoc(doc(db, "productos", docId), productData);
             alert("¡Prenda actualizada con éxito! 🎉");
