@@ -1,0 +1,133 @@
+/* Configuración General */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FAF6F0; /* Fondo Beige clarito y limpio */
+    color: #5D5451; /* Texto marrón suave en lugar de negro agresivo */
+}
+
+/* Navbar Personalizado */
+.navbar-custom {
+    background-color: #FFE5EC !important; /* Rosa Pastel */
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 600;
+    color: #D84B76 !important;
+    letter-spacing: 1px;
+}
+
+.navbar-custom .nav-link {
+    color: #6C5B57 !important;
+}
+
+.navbar-custom .nav-link.active, .navbar-custom .nav-link:hover {
+    color: #D84B76 !important;
+    font-weight: 600;
+}
+
+.btn-search {
+    border-color: #D84B76;
+    color: #D84B76;
+}
+
+.btn-search:hover {
+    background-color: #D84B76;
+    color: white;
+}
+
+/* Sección Hero / Banner */
+.hero-section {
+    background: linear-gradient(135deg, #FFE5EC 0%, #F9F1E7 100%);
+    color: #6C5B57;
+    border-bottom: 3px solid #FFF;
+}
+
+.hero-section h1 {
+    color: #D84B76;
+}
+
+.section-title {
+    color: #6C5B57;
+    position: relative;
+    font-weight: 600;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #D84B76;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Tarjetas de Productos */
+.product-card {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(216, 75, 118, 0.15) !important;
+}
+
+.product-img {
+    height: 320px;
+    object-fit: cover; /* Evita que la foto de la prenda se deforme */
+}
+
+.badge-stock {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #D84B76;
+    color: white;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.product-price {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #D84B76;
+}
+
+/* Tallas */
+.bg-size {
+    background-color: #F0E6D8; /* Beige para las tallas */
+    color: #6C5B57;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    margin-right: 4px;
+    border-radius: 5px;
+}
+
+/* Botón de WhatsApp */
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebd58;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+/* Footer */
+.footer-custom {
+    background-color: #FFE5EC;
+    color: #6C5B57;
+    font-size: 0.9rem;
+}
