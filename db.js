@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 // 2. CONFIGURACIÓN DE APIS REALES
-const IMGBB_API_KEY = "fd25ac019aca9ad75a4001e66a5dd4ce"; 
+const url = "https://api.imgbb.com/1/upload?key=fd25ac019aca9ad75a4001e66a5dd4ce";
 const WHATSAPP_PHONE = "573332244628"; 
 
 // Inicializar Firebase
