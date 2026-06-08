@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./img/logoSani.png" type="image/x-icon">
-    <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Iconos de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <title>SANI PIJAMAS</title>
     
@@ -138,7 +135,6 @@
 </head>
 <body>
 
-    <!-- Navbar original conectado y estilizado -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">SANI PIJAMAS</a>
@@ -165,7 +161,6 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <!-- Botón para activar el panel administrador -->
                         <a class="nav-link" href="#" onclick="toggleAdminPanel(); return false;"><i class="bi bi-gear-fill"></i> Modo Admin</a>
                     </li>
                 </ul>
@@ -177,7 +172,6 @@
         </div>
     </nav>
 
-    <!-- Banner Principal para llamar la atención -->
     <header class="hero-banner text-center">
         <div class="container">
             <h1 class="display-5">Colecciones que Enamoran</h1>
@@ -187,7 +181,6 @@
 
     <div class="container my-5">
 
-        <!-- PANEL DE ADMINISTRACIÓN -->
         <div id="adminPanel" class="admin-panel d-none">
             <h3 class="mb-3 text-secondary"><i class="bi bi-person-lock"></i> Gestor de Prendas (Solo Tú)</h3>
             <form id="productForm" class="row g-3">
@@ -209,8 +202,8 @@
                     <input type="text" id="prodDesc" class="form-control" placeholder="Ej: Tela piel de durazno, fresca y suave" required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-bold">Enlace de la imagen (URL de Postimages o ImgBB)</label>
-                    <input type="url" id="prodImageUrl" class="form-control" placeholder="https://i.postimg.cc/..." required>
+                    <label class="form-label fw-bold">Foto del producto (Selecciona un archivo)</label>
+                    <input type="file" id="prodImageFile" class="form-control" accept="image/*" required>
                 </div>
                 <div class="col-12 text-end">
                     <button type="button" class="btn btn-secondary me-2" onclick="toggleAdminPanel()">Cerrar</button>
@@ -219,169 +212,17 @@
             </form>
         </div>
 
-        <!-- Sección del catálogo dinámico -->
         <h2 class="text-center section-title">Catálogo SANI</h2>
         <div class="row g-4" id="catalogContainer">
-            <!-- Los productos se inyectan acá desde el arreglo -->
-        </div>
+            </div>
     </div>
 
-    <!-- Footer tierno -->
     <footer class="text-center py-4 mt-5">
         <p class="mb-0">&copy; 2026 SANI PIJAMAS — Hecho para brillar ✨</p>
     </footer>
 
-    <!-- Bootstrap Bundle JS -->
+    <script type="module" src="./db.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- CONTROLADOR DEL CATÁLOGO -->
-    <script>
-        // REEMPLAZA AQUÍ TU NÚMERO DE CELULAR (Código de país + número sin espacios)
-        const WHATSAPP_PHONE = "573332244628"; 
-
-        // Lista fija de productos que TODOS tus clientes verán siempre en internet.
-        // Puedes agregar, quitar o editar los elementos de esta lista directamente aquí en el código.
-        let currentProducts = [
-            {
-                name: 'Pijama Short "Nubes de Amor"',
-                price: '45.000',
-                sizes: ['S', 'M', 'L'],
-                desc: 'Hermoso conjunto de short y blusa en tela piel de durazno, suave y fresca.',
-                image: 'https://images.unsplash.com/photo-1562572159-4ebcd318f4dd?q=80&w=400&auto=format&fit=crop'
-            },
-            {
-                name: 'Pijama Pantalón "Sweet Dreams"',
-                price: '60.000',
-                sizes: ['M', 'L', 'XL'],
-                desc: 'Pijama de pantalón largo con botones, perfecta para noches frescas y cómodas.',
-                image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=400&auto=format&fit=crop'
-            }
-        ];
-
-        // Intentar cargar modificaciones guardadas temporalmente (solo para tus pruebas en local)
-        if(localStorage.getItem('sani_catalog_fixed')) {
-            currentProducts = JSON.parse(localStorage.getItem('sani_catalog_fixed'));
-        }
-
-        const catalogContainer = document.getElementById('catalogContainer');
-        const productForm = document.getElementById('productForm');
-
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('d-none');
-            renderCatalog();
-        }
-
-        // Renderizar catálogo en la pantalla
-        function renderCatalog() {
-            catalogContainer.innerHTML = '';
-
-            currentProducts.forEach((product, index) => {
-                let sizesHTML = '';
-                product.sizes.forEach(size => {
-                    sizesHTML += `<span class="badge badge-talla rounded">${size.trim()}</span>`;
-                });
-
-                let whatsappText = encodeURIComponent(`¡Hola Sani! Me interesa la "${product.name}". ¿Está disponible?`);
-                let whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
-
-                // Si abres el modo admin, aparecen las opciones de editar y borrar en el código fuente
-                const isAdminVisible = !document.getElementById('adminPanel').classList.contains('d-none');
-                let adminButtons = '';
-                
-                if (isAdminVisible) {
-                    adminButtons = `
-                        <div class="mt-3 pt-2 border-top d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-primary" onclick="editProduct(${index})"><i class="bi bi-pencil-square"></i> Editar</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${index})"><i class="bi bi-trash3"></i> Borrar</button>
-                        </div>
-                    `;
-                }
-
-                const cardHTML = `
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card product-card border-0 shadow-sm h-100">
-                            <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold text-dark">${product.name}</h5>
-                                <p class="card-text text-muted flex-grow-1">${product.desc}</p>
-                                <div class="mb-3">
-                                    <span class="text-muted small d-block mb-1">Tallas disponibles:</span>
-                                    ${sizesHTML}
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="product-price">$ ${product.price}</span>
-                                </div>
-                                <a href="${whatsappUrl}" target="_blank" class="btn btn-whatsapp text-center w-100">
-                                    <i class="bi bi-whatsapp me-2"></i>Me interesa
-                                </a>
-                                ${adminButtons}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                catalogContainer.innerHTML += cardHTML;
-            });
-        }
-
-        // Guardar o Editar Producto usando URLs de imágenes fijas
-        productForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const editIndex = parseInt(document.getElementById('editIndex').value);
-            const name = document.getElementById('prodName').value;
-            const price = document.getElementById('prodPrice').value;
-            const sizes = document.getElementById('prodSizes').value.split(',');
-            const desc = document.getElementById('prodDesc').value;
-            const imageUrl = document.getElementById('prodImageUrl').value;
-
-            const productData = {
-                name: name,
-                price: price,
-                sizes: sizes,
-                desc: desc,
-                image: imageUrl
-            };
-
-            if (editIndex > -1) {
-                currentProducts[editIndex] = productData;
-            } else {
-                currentProducts.push(productData);
-            }
-
-            // Guardar cambio local de prueba e imprimir en consola el nuevo objeto por si quieres copiarlo
-            localStorage.setItem('sani_catalog_fixed', JSON.stringify(currentProducts));
-            console.log("Copia esta lista actualizada si quieres dejarla fija en el código:", JSON.stringify(currentProducts));
-            
-            productForm.reset();
-            document.getElementById('editIndex').value = "-1";
-            document.getElementById('btnSave').innerText = "Guardar Prenda";
-            renderCatalog();
-            alert("Prenda actualizada en tu pantalla. ¡Recuerda actualizarla en tu lista de código de GitHub para que sea permanente para tus clientes!");
-        });
-
-        window.editProduct = function(index) {
-            const prod = currentProducts[index];
-            document.getElementById('editIndex').value = index;
-            document.getElementById('prodName').value = prod.name;
-            document.getElementById('prodPrice').value = prod.price;
-            document.getElementById('prodSizes').value = prod.sizes.join(', ');
-            document.getElementById('prodDesc').value = prod.desc;
-            document.getElementById('prodImageUrl').value = prod.image;
-            document.getElementById('btnSave').innerText = "Actualizar Prenda";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        window.deleteProduct = function(index) {
-            if (confirm(`¿Segura que quieres borrar "${currentProducts[index].name}"?`)) {
-                currentProducts.splice(index, 1);
-                localStorage.setItem('sani_catalog_fixed', JSON.stringify(currentProducts));
-                renderCatalog();
-            }
-        };
-
-        // Render inicial
-        renderCatalog();
-    </script>
 </body>
 </html>
